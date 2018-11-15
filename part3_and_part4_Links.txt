@@ -3,4 +3,4 @@ https://youtu.be/mwPlBDFq_i4
 Part4:
 https://youtu.be/2tTPE87Ci2w
 
-I had to upload the videos to youtube,apparently github only allows audio uploads.
+I had to upload the videos to youtube,apparently github only allows audio uploads. For some reason the youtube links also do not load on firefox, so please use google chrome.
