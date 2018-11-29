@@ -3,9 +3,13 @@ https://youtu.be/mwPlBDFq_i4
 Part4:
 https://youtu.be/2tTPE87Ci2w
 
-I had to upload the videos to youtube,apparently github only allows audio uploads. For some reason the youtube links also do not load on firefox, so please use google chrome.
+I had to upload the videos to youtube,apparently github only allows audio uploads. 
+For some reason the youtube links also do not load on firefox, so please use google chrome.
 
 Part 5:
 https://youtu.be/Yg1-kUtpzoU
-although the music cannot be heard when the buttons are pressed in the video, the music is playing. download the project and run
-java bandly in the Proj file and when you press a button it will play music!
+although the music cannot be heard when the buttons are pressed in the video, the music is playing. 
+download the project and run "java bandly" in the Proj file and when you press a button it will play music!
+
+Download:
+https://drive.google.com/open?id=1yHC913exe_Y4Z9hpWrE0dwHBFl9Uz6xr
