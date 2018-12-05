@@ -2,6 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import javax.swing.JOptionPane;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+/**
+This class is used to create the Artist view, where a single artist can be viewed.
+It is, in this implementation, only accessed through the Band View, it populates the view
+with the artist, his name, his bio, and his songs as well as albums*/
 public class guiOne extends JFrame{
     
     private JLabel Name;
@@ -12,15 +24,17 @@ public class guiOne extends JFrame{
 	private JTextField search;
 	private int x;
 	private int y;
-	public guiOne(Musician musician){
+	private Artist artist;
+	public guiOne(Artist musician){
 		x=0;
 		y=0;
+		artist = musician;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.setTitle("Profile Page");
 		JPanel layout = new JPanel (new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-
+		guiOneController controller = new guiOneController(artist);
 		Name = new JLabel("Name: "+musician.name);
 		c.gridy = y;
 		c.gridx = x;
@@ -40,7 +54,10 @@ public class guiOne extends JFrame{
 			c.gridy = y;
 			y++;
 			allSongs = new JButton(song.Name);
+			allSongs.addActionListener(controller);
+			allSongs.setActionCommand("Play "+song.Name);
 			layout.add(allSongs,c);
+
 		}
 		Bio = new JLabel("These are my Albums");
 		c.gridy = y;
@@ -57,37 +74,22 @@ public class guiOne extends JFrame{
 				c.gridx = temp;
 				temp++;
 				allSongs = new JButton(song.Name);
+				allSongs.addActionListener(controller);
+				allSongs.setActionCommand("Play "+song.Name);
 				layout.add(allSongs,c);
 			}
 		}
 
-		search = new JTextField("Search for Band");
+
+		searchB = new JButton("Stop Player");
 		c.gridy = y;
 		c.gridx = x;
-		layout.add(search,c);
-		searchB = new JButton("Search");
-		c.gridy = y;
-		c.gridx = x+1;
 		y++;
+		searchB.addActionListener(controller);
+		searchB.setActionCommand("Stop");
 		layout.add(searchB,c);
 
 		this.add(layout);
 		this.pack();
-	}
-	public static void main(String[] args) {
-		Song s1 = new Song("MyFirstSong","Path");
-		Song s2 = new Song("MySecondSong","Path");
-		Song s3 = new Song("MyThirdSong","Path");
-		Song s4 = new Song("MyFourthSong","Path");
-		List<Song> songs = new ArrayList<Song>();
-		songs.add(s1);
-		songs.add(s2);
-		songs.add(s3);
-		songs.add(s4);
-		Album a1 = new Album("MyFirstAlbum",songs);
-		List<Album> albums = new ArrayList<Album>();
-		albums.add(a1);
-		Musician hart = new Musician("Hartland", "Boulder, CO", "I'm awesome", "Bass", songs, albums);
-		guiOne profile = new guiOne(hart);
 	}
 }

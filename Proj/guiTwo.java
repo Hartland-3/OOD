@@ -2,6 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import javax.swing.JOptionPane;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+/**This is the band view, used to view a band, it is the main view in my
+project. This view lists a bands members, which can be clicked on to access their profiles.
+It also lists the bands songs, albums, name, location, and bio*/
 public class guiTwo extends JFrame{
     
     private JLabel Name;
@@ -13,12 +24,16 @@ public class guiTwo extends JFrame{
 	private JTextField search;
 	private int y;
 	private int x;
+	private Band _band;
+	private AudioStream audio;
 	public guiTwo(Band band){
 		x=0;
 		y=0;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.setTitle("Profile Page");
+		_band=band;
+		guiTwoController controller = new guiTwoController(_band);
 		JPanel layout = new JPanel (new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
@@ -32,8 +47,10 @@ public class guiTwo extends JFrame{
 		c.gridy = y;
 		y++;
 		layout.add(Bio,c);
-		for(Musician member : band.members){
+		for(Artist member : band.members){
 			memsBand = new JButton(member.name);
+			memsBand.addActionListener(controller);
+			memsBand.setActionCommand("Artist "+member.name);
 			c.gridy=y;
 			y++;
 			layout.add(memsBand,c);
@@ -47,6 +64,8 @@ public class guiTwo extends JFrame{
 			c.gridy = y;
 			y++;
 			allSongs = new JButton(song.Name);
+			allSongs.addActionListener(controller);
+			allSongs.setActionCommand("Play "+song.Name);
 			layout.add(allSongs,c);
 		}
 		Bio = new JLabel("These are our Albums");
@@ -64,38 +83,19 @@ public class guiTwo extends JFrame{
 				c.gridx = temp;
 				temp++;
 				allSongs = new JButton(song.Name);
+				allSongs.addActionListener(controller);
+				allSongs.setActionCommand("Play "+song.Name);
 				layout.add(allSongs,c);
 			}
 		}
-		search = new JTextField("Search for members");
+		searchB = new JButton("Stop Player");
 		c.gridy = y;
 		c.gridx = x;
-		layout.add(search,c);
-		searchB = new JButton("Search");
-		c.gridy = y;
-		c.gridx = x+1;
 		y++;
+		searchB.addActionListener(controller);
+		searchB.setActionCommand("Stop");
 		layout.add(searchB,c);
 		this.add(layout);
 		this.pack();
-	}
-	public static void main(String[] args) {
-		Song s1 = new Song("MyFirstSong","Path");
-		Song s2 = new Song("MySecondSong","Path");
-		Song s3 = new Song("MyThirdSong","Path");
-		Song s4 = new Song("MyFourthSong","Path");
-		List<Song> songs = new ArrayList<Song>();
-		songs.add(s1);
-		songs.add(s2);
-		songs.add(s3);
-		songs.add(s4);
-		Album a1 = new Album("MyFirstAlbum",songs);
-		List<Album> albums = new ArrayList<Album>();
-		albums.add(a1);
-		Musician hart = new Musician("Hartland", "Boulder, CO", "I'm awesome", "Bass", songs, albums);
-		List<Musician> mems = new ArrayList<Musician>();
-		mems.add(hart);
-		Band bsl = new Band("Boulder Sound Lab", "Boulder", mems, null,songs,albums);
-		guiTwo profile = new guiTwo(bsl);
 	}
 }

@@ -1,30 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
-public class Band{
-	String name;
-	String Location;
-	List<Musician> members;
+/**This class allows a band to be created with a list of members and open positions. 
+It does this by using the composite design pattern to create a list of producers and musicians.*/
+public class Band extends Artist{
+	List<Artist> members;
 	List<String> OpenPositions;
-	List<Song> Songs;
-	List<Album> Albums;
-	public Band(String name, String Location, List<Musician> members, List<String> openPositions,List<Song> Songs,List <Album> Albums){
-		this.name = name;
-		this.Location = Location;
+	public Band(String name, String Bio, String Location, List<Artist> members, List<String> openPositions,List<Song> Songs,List <Album> Albums){
+		super(name,Location,Bio,Songs,Albums);
 		this.members = members;
 		this.OpenPositions = openPositions;
-		this.Songs = Songs;
-		this.Albums = Albums;
 	}
-	public String toString(){
-		Musician mem = this.members.get(0);
-		return("Hi I am " + mem.name +" I am in the band " + this.name);
-	}
-	// public static void main(String[] args) {
-	// 	List<Musician> mems = new ArrayList<Musician>();
-	// 	Musician me = new Musician("Hartland", "Boulder, CO", "I'm awesome", "Bass");
-	// 	mems.add(me);
-	// 	Band BSL = new Band("Boulder Sound Lab", "Boulder", mems, null);
-	// 	System.out.println(BSL.toString());
-
-	// }
 }

@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+/**This is the main class used to build profiles, it allows an artist or band or producer
+to add their name, location, bio, songs, and albums*/
 public abstract class Artist{
 	String name;
 	String Location;

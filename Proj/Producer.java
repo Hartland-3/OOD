@@ -1,12 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
+/**This class simply extends the artist class as there is no difference between it and a Producer*/
 public class Producer extends Artist{
-	public Producer(String name, String Location, String Bio){
-		super(name,Location,Bio);
-	}
-	public String toString(){
-		return("Hi I am " + this.name);
-	}
-	public static void main(String[] args) {
-		Producer me = new Producer("Trat", "Somewhere", "So cool am I yes");
-		System.out.println(me.toString());
+	public Producer(String name,String Location, String Bio,List<Song> Songs,List<Album> Albums){
+		super(name,Location,Bio,Songs,Albums);
 	}
 }

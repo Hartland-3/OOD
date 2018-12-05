@@ -1,15 +1,29 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import javax.swing.JOptionPane;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+/** This class is used to to play songs using the AudioPlayer class in java*/
 public interface Player{
 
-	public default void Play(String path){
-		System.out.println("Play "+ path);
+
+	public default void play(AudioStream audio)
+	{
+	    try
+	    {
+	        AudioPlayer.player.start(audio);
+
+
+	    }
+	    catch(Exception e)
+	    {
+	        JOptionPane.showMessageDialog(null,"Error");
+	    }
 	}
-	public default void PlayA(List<Song> songs){
-		// System.out.println("Play "+ path);
-		for (int i = 0; i < songs.size() ; i++) {
-			Song song = songs.get(i);
-			System.out.println("Play "+ song.Path);
-		}
+	public default void stop(AudioStream audio){
+	    AudioPlayer.player.stop(audio);
 	}
+	  
+
 }
